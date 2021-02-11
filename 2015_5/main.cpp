@@ -1,49 +1,48 @@
+
+
+//first part solution deleted. This is second part
+
 #include <iostream>
 #include<string>
+#include<fstream>
 
 using namespace std;
 
-struct Vowels
+bool OneLetterBetweenReq(string s)
 {
-	char a, e, i, o, u;
-}vowels;
-//setting vowels
-vowels.a = 'a';
-vowels.e = 'e';
-vowels.i = 'i';
-vowels.o = 'o';
-vowels.u = 'u';
+	char c = '0';
+	for (int i = 0; i < (s.size() - 2); i++)    // size - 2 to stop accessing of out of range stuff
+	{
+		if (s[i] == s[i + 2])
+		{
+			return true;
+		}
+	}
 
-struct NaughtySubstrings {
-	string ab, cd, pq, xy;
-}naughtySubstrings;
-//setting naughty substrings
-naughtySubstrings.ab = "ab";
-naughtySubstrings.cd = "cd";
-naughtySubstrings.pq = "pq";
-naughtySubstrings.xy = "xy";
-
-
-
-bool VowelReq(string s)
-{
-
+	return false;
 }
 
-bool LetterRepetitionReq(string s)
+bool DoubleRepetitionReq(string s)
 {
+	string substr = "00";
+	string substr2 = "00";
+	for (int i = 0; i < (s.size() - 3); i++)   //size - 3 because we don't want to access out of range stuff
+	{
+		substr = s.substr(i, 2);
+		for (int j = i + 2; j < (s.size() - 1); j++)   //size - 1 because we don't want to access out of range stuff
+		{
+			substr2 = s.substr(j, 2);
+			if (substr == substr2)
+				return true;
+		}
+	}
 
+	return false;
 }
-
-bool NaughtySubstrReq(string s)
-{
-
-}
-
 
 bool StringChecker(string s)
 {
-	if (VowelReq(s) && LetterRepetitionReq(s) && NaughtySubstrReq(s))
+	if (DoubleRepetitionReq(s)&&OneLetterBetweenReq(s))
 	{
 		return true;
 	}
@@ -53,26 +52,35 @@ bool StringChecker(string s)
 
 int main()
 {
+	std::ifstream inFile;
+	char c;
 
-
-
-	ifstream inputList;
-	inputList.open("list.txt");
-	if (!inputList)
-	{
+	inFile.open("list.txt");
+	if (!inFile) {
 		std::cerr << "Unable to open file datafile.txt";
 		exit(1);
 	}
 
 	string s;
+	//cin >> s;
 	int numberOfNiceStrings = 0;
-	while (getline(inputList, s))
+	int totalStrings = 0;
+
+	while (getline(inFile, s))
 	{
 		if (StringChecker(s))
 		{
 			numberOfNiceStrings++;
 		}
+		totalStrings++;
 	}
 
-	cout << "Number of nice strings is: " << numberOfNiceStrings << "\n";
+
+	/*if (StringChecker(s))
+	{
+		numberOfNiceStrings++;
+	}
+	totalStrings++;*/
+
+	cout << "Number of nice strings is: " << numberOfNiceStrings << "\n"<<"Total strings:"<<totalStrings<<"\n";
 }
