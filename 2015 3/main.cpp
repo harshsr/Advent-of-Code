@@ -6,8 +6,9 @@
 
 int main()
 {
+	const int gridMaxIndex = 2100;
+	int (*houseGridPtr)[gridMaxIndex] = new int[gridMaxIndex][gridMaxIndex];
 
-	int houseGrid[500][500];
 	std::vector<char> movementInput;
 
 	std::ifstream inFile;
@@ -28,19 +29,19 @@ int main()
 
 	//initializing the house grid with zeros
 
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < gridMaxIndex; i++)
 	{
-		for (int j = 0; j < 500; j++)
+		for (int j = 0; j < gridMaxIndex; j++)
 		{
-			houseGrid[i][j] = 0;
+			houseGridPtr[i][j] = 0;
 		}
 	}
 	
 	//starting house midpoint
-	houseGrid[250][250] = 1;
+	houseGridPtr[gridMaxIndex/2][gridMaxIndex/2] = 1;
 	
-	int startRowIndex = 250;
-	int startColumnIndex = 250;
+	int startRowIndex = gridMaxIndex/2;
+	int startColumnIndex = gridMaxIndex/2;
 	for (int i = 0; i < movementInput.size(); i = i + 2)
 	{
 		switch (movementInput[i])
@@ -48,28 +49,28 @@ int main()
 		case '^':
 		{
 			startColumnIndex++;
-			houseGrid[startRowIndex][startColumnIndex]++;
+			houseGridPtr[startRowIndex][startColumnIndex]++;
 			break;
 		}
 
 		case 'v':
 		{
 			startColumnIndex--;
-			houseGrid[startRowIndex][startColumnIndex]++;
+			houseGridPtr[startRowIndex][startColumnIndex]++;
 			break;
 		}
 
 		case '>':
 		{
 			startRowIndex++;
-			houseGrid[startRowIndex][startColumnIndex]++;
+			houseGridPtr[startRowIndex][startColumnIndex]++;
 			break;
 		}
 
 		case '<':
 		{
 			startRowIndex--;
-			houseGrid[startRowIndex][startColumnIndex]++;
+			houseGridPtr[startRowIndex][startColumnIndex]++;
 			break;
 		}
 
@@ -78,8 +79,8 @@ int main()
 		}
 	}
 
-	int startRowIndexRobo = 250;
-	int startColumnIndexRobo = 250;
+	int startRowIndexRobo = gridMaxIndex/2;
+	int startColumnIndexRobo = gridMaxIndex/2;
 
 	for (int i = 1; i < movementInput.size(); i = i + 2)
 	{
@@ -88,28 +89,28 @@ int main()
 		case '^':
 		{
 			startColumnIndexRobo++;
-			houseGrid[startRowIndexRobo][startColumnIndexRobo]++;
+			houseGridPtr[startRowIndexRobo][startColumnIndexRobo]++;
 			break;
 		}
 
 		case 'v':
 		{
 			startColumnIndexRobo--;
-			houseGrid[startRowIndexRobo][startColumnIndexRobo]++;
+			houseGridPtr[startRowIndexRobo][startColumnIndexRobo]++;
 			break;
 		}
 
 		case '>':
 		{
 			startRowIndexRobo++;
-			houseGrid[startRowIndexRobo][startColumnIndexRobo]++;
+			houseGridPtr[startRowIndexRobo][startColumnIndexRobo]++;
 			break;
 		}
 
 		case '<':
 		{
 			startRowIndex--;
-			houseGrid[startRowIndexRobo][startColumnIndexRobo]++;
+			houseGridPtr[startRowIndexRobo][startColumnIndexRobo]++;
 			break;
 		}
 
@@ -121,22 +122,22 @@ int main()
 	//to keep count of houses
 	int deliveryCompleteHouse=0;
 
-	for (int i = 0; i < (500); i++)
+	for (int i = 0; i < (gridMaxIndex); i++)
 	{
-		for (int j = 0; j < (500); j++)
+		for (int j = 0; j < (gridMaxIndex); j++)
 		{
-			if (houseGrid[i][j] != 0)
+			if (houseGridPtr[i][j] != 0)
 			{
 				deliveryCompleteHouse++;
 			}
 		}
 	}
 
-	for (int i = 0; i < (500); i++)
+	for (int i = 0; i < (gridMaxIndex); i++)
 	{
-		for (int j = 0; j < (500); j++)
+		for (int j = 0; j < (gridMaxIndex); j++)
 		{
-			std::cout << houseGrid[i][j];
+			std::cout << houseGridPtr[i][j];
 		}
 		std::cout << "\n";
 	}
