@@ -18,8 +18,7 @@ void SwitchLight(int i1, int j1, int i2, int j2, bool toggle, bool turnOff, bool
 		{
 			for (int j = j1; j <= j2; j++)
 			{
-				//toggle algo - oneminus
-				lightGridPtr[i][j] = 1-lightGridPtr[i][j];
+				lightGridPtr[i][j] += 2;
 			}
 		}
 	}
@@ -29,7 +28,11 @@ void SwitchLight(int i1, int j1, int i2, int j2, bool toggle, bool turnOff, bool
 		{
 			for (int j = j1; j <= j2; j++)
 			{
-				lightGridPtr[i][j] = 0;
+				lightGridPtr[i][j] -= 1;
+				if (lightGridPtr[i][j] < 0)
+				{
+					lightGridPtr[i][j] = 0;
+				}
 			}
 		}
 	}
@@ -39,7 +42,7 @@ void SwitchLight(int i1, int j1, int i2, int j2, bool toggle, bool turnOff, bool
 		{
 			for (int j = j1; j <= j2; j++)
 			{
-				lightGridPtr[i][j] = 1;
+				lightGridPtr[i][j] += 1;
 			}
 		}
 	}
@@ -148,14 +151,9 @@ int main()
 	{
 		for (int j = 0; j < lightGridSize; j++)
 		{
-			if (lightGridPtr[i][j] == 1)
-			{
-				onLightsCounter++;
-			}
-			std::cout << lightGridPtr[i][j];
+			onLightsCounter += lightGridPtr[i][j];
 		}
-		std::cout << "\n";
 	}
 
-	std::cout << "\nNumber of turned on lights is " << onLightsCounter;
+	std::cout << "\nTotal brightness is " << onLightsCounter;
 }
