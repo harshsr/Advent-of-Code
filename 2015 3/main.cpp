@@ -132,15 +132,5 @@ int main()
 			}
 		}
 	}
-
-	for (int i = 0; i < (gridMaxIndex); i++)
-	{
-		for (int j = 0; j < (gridMaxIndex); j++)
-		{
-			std::cout << houseGridPtr[i][j];
-		}
-		std::cout << "\n";
-	}
-
 	std::cout << "\n\n\n\n\n\nNo of houses that recieved delivery are " << deliveryCompleteHouse<<".\n\n";
 }

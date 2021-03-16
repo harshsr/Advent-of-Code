@@ -152,9 +152,7 @@ int main()
 			{
 				onLightsCounter++;
 			}
-			std::cout << lightGridPtr[i][j];
 		}
-		std::cout << "\n";
 	}
 
 	std::cout << "\nNumber of turned on lights is " << onLightsCounter;

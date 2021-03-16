@@ -16,7 +16,6 @@ void HashFinder(int& startingNumber, bool& foundHash)
 		std::string inputString = stringStart + std::to_string(startingNumber);
 		inputString = myMD5(inputString);
 
-		std::cout << "\n" << inputString;
 		std::string hashStart = inputString.substr(0, 6);
 
 		if (hashStart == "000000") {
@@ -29,7 +28,7 @@ void HashFinder(int& startingNumber, bool& foundHash)
 
 int main()
 {
-	
+	std::cout << "\nCalculating...\n";
 	int startingPoint1 = 0;
 	int startingPoint2 = 1250000;
 	int startingPoint3 = 2500000;
