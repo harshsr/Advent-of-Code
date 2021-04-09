@@ -29,6 +29,7 @@ int main()
 		}
 	}
 
+	//all the output wire names stored in following vector 
 	std::vector<std::string> allWireNamesSorted;
 
 	for (int i = 0; i < instructionsVector.size(); i++)
@@ -54,7 +55,6 @@ int main()
 
 		allWireNamesSorted.push_back(brokenInstruction.back());
 	}
-	std::sort(allWireNamesSorted.begin(), allWireNamesSorted.end());
 	
 	for (int i = 0; i < allWireNamesSorted.size(); i++)
 	{
