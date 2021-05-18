@@ -1,4 +1,5 @@
 // This program is a solution to advent of code 2015 day 8
+// Part 1 is done. This code is for part 2
 
 
 #include<iostream>
@@ -7,31 +8,17 @@
 #include <fstream>
 
 
-int NumMemoryChars(const std::string& InString)
+int NumEncodedChars(const std::string& InString)
 {
 	int TotalCharsLocal = 0;
 
-	//start this for loop with index 1 because our strings contain the initial and final double quotation marks
-	//End loop at length - 1 because our strings contain the initial and final double quotation marks
-	for (int i = 1; i < (InString.length() - 1); i++)
+	for (int i = 0; i < (InString.length()); i++)
 	{
-		if (InString.at(i) == ' ')
-		{
-			TotalCharsLocal = TotalCharsLocal;
-		}
 
-		if (InString.at(i) == '\\')
+		if (InString.at(i) == '\"' || InString.at(i) == '\\')
 		{
-			if (InString.at(i + 1) == '\\' || InString.at(i + 1) == '\"')
-			{
-				TotalCharsLocal = TotalCharsLocal + 1;
-				i = i + 1;
-			}
-			else if (InString.at(i + 1) == 'x')
-			{
-				TotalCharsLocal = TotalCharsLocal + 1;
-				i = i + 3;
-			}
+			
+			TotalCharsLocal = TotalCharsLocal + 2;
 		}
 		else
 		{
@@ -42,7 +29,7 @@ int NumMemoryChars(const std::string& InString)
 
 
 
-	return TotalCharsLocal;
+	return TotalCharsLocal+2;
 }
 
 int NumCodeChars(const std::string& InString)
@@ -60,7 +47,7 @@ int NumCodeChars(const std::string& InString)
 int main()
 {
 
-	int TotalMemoryChars = 0;
+	int TotalEncodedChars = 0;
 	int TotalCodeChars = 0;
 	std::vector<std::string> InputStrings;
 
@@ -86,13 +73,13 @@ int main()
 
 	for(int i = 0;i<InputStrings.size();i++)
 	{
-		TotalMemoryChars = TotalMemoryChars + NumMemoryChars(InputStrings[i]);
+		TotalEncodedChars = TotalEncodedChars + NumEncodedChars(InputStrings[i]);
 		TotalCodeChars = TotalCodeChars + NumCodeChars(InputStrings[i]);
 	}
 
 
 
-	std::cout << TotalCodeChars - TotalMemoryChars;
+	std::cout <<TotalEncodedChars - TotalCodeChars;
 
 }
 
