@@ -22,6 +22,9 @@ Belfast -> London -> Dublin = 982
 The shortest of these is London -> Dublin -> Belfast = 605, and so the answer is 605 in this example.
 
 What is the distance of the shortest route?
+
+
+Part 2 - Longest Distance
 */
 
 #include <iostream>
@@ -107,6 +110,8 @@ int main()
     std::vector<std::string> Locations;
     int TotalMinimumDistance = 316;   // We want a min so this variable is initialized to the default Locations vector route distance
     std::vector<std::string> CurrentShortestRoute = Locations;
+    std::vector<std::string> CurrentLongestRoute = Locations;
+    int TotalMaximumDistance = 316;
 
 
     // store input line by line
@@ -194,11 +199,16 @@ int main()
             TotalMinimumDistance = CurrentRouteDistance;
             CurrentShortestRoute = Locations;
         }
+        if (CurrentRouteDistance > TotalMaximumDistance)
+        {
+            TotalMaximumDistance = CurrentRouteDistance;
+            CurrentLongestRoute = Locations;
+        }
     }
 
     for (int i = 0; i < Locations.size(); i++)
     {
-        std::cout << CurrentShortestRoute[i] << "\n";
+        std::cout << CurrentLongestRoute[i] << "\n";
     }
-    std::cout << TotalMinimumDistance;
+    std::cout << TotalMaximumDistance;
 }
